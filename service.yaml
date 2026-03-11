@@ -4,9 +4,11 @@ metadata:
   name: node-service
   namespace: application
 spec:
-  type: ClusterIP
+  type: LoadBalancer
+
   selector:
     app: node-app
+
   ports:
   - port: 80
     targetPort: 80
