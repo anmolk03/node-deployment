@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: node-app
-        image: pipelinetest11.azurecr.io/anmolkpipelinepractice:5
+        image: registrydemo11.azurecr.io/app2:12
         ports:
         - containerPort: 80
 
