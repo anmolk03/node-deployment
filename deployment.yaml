@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: node-app
   namespace: application
-  labels:
-    app: node-app
 spec:
   replicas: 2
   selector:
@@ -20,6 +18,7 @@ spec:
         image: pipelinetest11.azurecr.io/anmolkpipelinepractice:5
         ports:
         - containerPort: 80
+
         resources:
           requests:
             cpu: "100m"
@@ -27,3 +26,28 @@ spec:
           limits:
             cpu: "500m"
             memory: "512Mi"
+
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_HOST
+
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_USER
+
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_PASSWORD
+
+        - name: MYSQL_DB
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_DB
