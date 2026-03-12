@@ -3,21 +3,25 @@ kind: Deployment
 metadata:
   name: node-app
   namespace: application
+
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: node-app
+
   template:
     metadata:
       labels:
         app: node-app
+
     spec:
       containers:
       - name: node-app
         image: registrydemo1.azurecr.io/node:25
+
         ports:
-        - containerPort: 80
+        - containerPort: 8000
 
         resources:
           requests:
@@ -28,6 +32,13 @@ spec:
             memory: "512Mi"
 
         env:
+
+        - name: APPLICATION_HOST
+          value: "0.0.0.0"
+
+        - name: APPLICATION_PORT
+          value: "8000"
+
         - name: DBHOST
           valueFrom:
             secretKeyRef:
@@ -40,7 +51,7 @@ spec:
               name: mysql-secret
               key: DBUSERNAME
 
-        - name: DBUSERNAME
+        - name: DBPASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-secret
