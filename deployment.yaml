@@ -28,26 +28,32 @@ spec:
             memory: "512Mi"
 
         env:
-        - name: MYSQL_HOST
+        - name: DBHOST
           valueFrom:
             secretKeyRef:
               name: mysql-secret
-              key: MYSQL_HOST
+              key: DBHOST
 
-        - name: MYSQL_USER
+        - name: DBUSERNAME
           valueFrom:
             secretKeyRef:
               name: mysql-secret
-              key: MYSQL_USER
+              key: DBUSERNAME
 
-        - name: MYSQL_PASSWORD
+        - name: DBUSERNAME
           valueFrom:
             secretKeyRef:
               name: mysql-secret
-              key: MYSQL_PASSWORD
+              key: DBPASSWORD
 
-        - name: MYSQL_DB
+        - name: DBNAME
           valueFrom:
             secretKeyRef:
               name: mysql-secret
-              key: MYSQL_DB
+              key: DBNAME
+
+        - name: DBDIALECT
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: DBDIALECT
